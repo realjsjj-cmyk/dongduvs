@@ -120,18 +120,36 @@
       .side-contact{width:100%}
     }
 
+      /* 공통 버튼 스타일 */
+  .link-btn {
+    display: inline-block;
+    margin: 4px 4px 4px 0;
+    padding: 12px 20px;        /* 터치 영역 확대 */
+    border-radius: 10px;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 700;
+    z-index: 1001;             /* 다른 요소 위로 */
+    position: relative;
+    touch-action: manipulation; /* 모바일 터치 최적화 */
+  }
+
+  .youtube-btn { background: #FF0000; }
+  .blog-btn    { background: #03C75A; }
+
     /* 전화·문자 버튼 */
-    .call-btn, .sms-btn{
-      display:inline-block;
-      margin:4px 4px 4px 0;
-      padding:10px 16px;
-      border-radius:10px;
-      font-weight:700;
-      color:#fff;
-      text-decoration:none;
-    }
-    .call-btn{background:#0b6cf3;}
-    .sms-btn{background:#0bbf6c;}
+   .call-btn, .sms-btn {
+  display: inline-block;
+  padding: 12px 20px; /* 터치 영역 확보 */
+  border-radius: 10px;
+  font-weight: 700;
+  color: #fff;
+  background: #0b6cf3; /* 전화 걸기 */
+  margin: 4px 4px 4px 0;
+  position: relative;
+  z-index: 1001; /* 겹침 문제 방지 */
+}
+.sms-btn { background: #0bbf6c; }
   </style>
 
 </head>
@@ -307,8 +325,18 @@
             <div class="contact-card">
               <h4>빠른 상담</h4>
               <p style="margin:6px 0;color:var(--muted)">전화문의 또는 문의폼으로 상담 예약 가능합니다.</p>
-              유튜브 이동: <a href="https://www.youtube.com/@디디스-l7y" target="_blank" style="background:#FF0000;margin-left:8px;padding:10px 16px;border-radius:10px;color:#fff;text-decoration:none;font-weight:700;">YouTube</a><br><br>
-              블로그 이동: <a href="https://blog.naver.com/realjsj1" target="_blank" style="background:#03C75A;margin-left:8px;padding:10px 16px;border-radius:10px;color:#fff;text-decoration:none;font-weight:700;">블로그</a>
+              <!-- 유튜브 이동 -->
+<a href="https://www.youtube.com/@디디스-l7y" target="_blank"
+   class="link-btn youtube-btn">
+   YouTube
+</a>
+
+<!-- 블로그 이동 -->
+<a href="https://blog.naver.com/realjsj1" target="_blank"
+   class="link-btn blog-btn">
+   블로그
+</a>
+
               <ul class="contact-list">
                 <li>상담전화: <a href="tel:01047370807">010-4737-0807</a></li>
                 <li>운영시간: 평일 09:00 - 18:00</li>
