@@ -150,6 +150,15 @@
   z-index: 1001; /* 겹침 문제 방지 */
 }
 .sms-btn { background: #0bbf6c; }
+.call-link {
+  display: inline-block;
+  z-index: 1001;
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 700;
+  padding: 6px 8px; /* 터치 영역 확대 */
+}
+
   </style>
 
 </head>
@@ -338,7 +347,8 @@
 </a>
 
               <ul class="contact-list">
-                <li>상담전화: <a href="tel:01047370807">010-4737-0807</a></li>
+                <li>상담전화: <a href="tel:01047370807" class="call-link">010-4737-0807</a></li>
+
                 <li>운영시간: 평일 09:00 - 18:00</li>
                 <li>주소: 평화로 2185번길 46</li>
               </ul>
@@ -370,7 +380,8 @@
                 <h4>담당자 정보</h4>
                 <p style="margin:6px 0;color:var(--muted)">담당자: 분양팀 / HC Partners</p>
                 <p style="margin:6px 0;color:var(--muted)">e-mail: realjsj1@naver.com</p>
-                <p style="margin:6px 0;color:var(--muted)"><li>전화: <a href="tel:01047370807">010-4737-0807</a></li></p>
+                <p style="margin:6px 0;color:var(--muted)"><li>전화: <a href="tel:01047370807" class="call-link">010-4737-0807</a></li></p>
+
               </div>
             </div>
           </div>
