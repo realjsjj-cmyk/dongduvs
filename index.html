@@ -183,6 +183,34 @@
 .clickable-img:hover {
   transform: scale(1.05);
 }
+.img-modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0; 
+  top: 0;
+  width: 100%; 
+  height: 100%;
+  background: rgba(0,0,0,0.75);
+  align-items: center;
+  justify-content: center;
+}
+
+.img-modal img {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 10px;
+}
+
+.close-btn {
+  position: absolute;
+  top: 30px;
+  right: 40px;
+  color: #fff;
+  font-size: 42px;
+  font-weight: bold;
+  cursor: pointer;
+}
 
 
   </style>
@@ -427,43 +455,38 @@
     </footer>
   </main>
 <script>
-  // 클릭 가능한 이미지 확대 모달
-  document.querySelectorAll('.clickable-img').forEach(img => {
-    img.style.cursor = 'pointer';
-    img.addEventListener('click', () => {
-      const modal = document.createElement('div');
-      modal.style.position = 'fixed';
-      modal.style.top = 0;
-      modal.style.left = 0;
-      modal.style.width = '100%';
-      modal.style.height = '100%';
-      modal.style.backgroundColor = 'rgba(0,0,0,0.8)';
-      modal.style.display = 'flex';
-      modal.style.alignItems = 'center';
-      modal.style.justifyContent = 'center';
-      modal.style.zIndex = 10000;
+  const modal = document.getElementById("imgModal");
+  const modalImg = document.getElementById("modalImg");
+  const closeBtn = document.querySelector(".close-btn");
 
-      const modalImg = document.createElement('img');
+  // 이미지 클릭 → 모달 오픈
+  document.querySelectorAll(".gallery img").forEach(img => {
+    img.addEventListener("click", () => {
+      modal.style.display = "flex";
       modalImg.src = img.src;
-      modalImg.style.maxWidth = '90%';
-      modalImg.style.maxHeight = '90%';
-      modalImg.style.borderRadius = '12px';
-      modal.appendChild(modalImg);
-
-      modal.addEventListener('click', () => {
-        document.body.removeChild(modal);
-      });
-
-      document.body.appendChild(modal);
     });
   });
+
+  // 닫기 버튼
+  closeBtn.addEventListener("click", () => {
+    modal.style.display = "none";
+    modalImg.src = "";       // 중요: 잔상/이전 이미지 유지 제거
+  });
+
+  // 모달 배경 클릭해도 닫힘
+  modal.addEventListener("click", e => {
+    if (e.target === modal) {
+      modal.style.display = "none";
+      modalImg.src = "";
+    }
+  });
 </script>
+
 <script>
-  // 클릭 가능한 이미지 확대 모달 개선
   document.querySelectorAll('.clickable-img').forEach(img => {
     img.style.cursor = 'pointer';
     img.addEventListener('click', () => {
-      // 모달 생성
+
       const modal = document.createElement('div');
       modal.style.position = 'fixed';
       modal.style.top = 0;
@@ -476,16 +499,13 @@
       modal.style.justifyContent = 'center';
       modal.style.zIndex = 10000;
 
-      // 모달 이미지
       const modalImg = document.createElement('img');
       modalImg.src = img.src;
       modalImg.style.maxWidth = '90%';
       modalImg.style.maxHeight = '90%';
       modalImg.style.borderRadius = '12px';
-      modalImg.style.boxShadow = '0 10px 40px rgba(0,0,0,0.5)';
       modal.appendChild(modalImg);
 
-      // 닫기 버튼
       const closeBtn = document.createElement('span');
       closeBtn.innerHTML = '&times;';
       closeBtn.style.position = 'absolute';
@@ -497,34 +517,36 @@
       closeBtn.style.fontWeight = 'bold';
       modal.appendChild(closeBtn);
 
-      // 닫기 함수
       const closeModal = () => {
-        if(document.body.contains(modal)){
+        if (document.body.contains(modal)) {
           document.body.removeChild(modal);
         }
-      }
+      };
 
       // 배경 클릭 → 닫기
       modal.addEventListener('click', e => {
-        if(e.target === modal) closeModal();
+        if (e.target === modal) closeModal();
       });
 
-      // 닫기 버튼 클릭
-      closeBtn.addEventListener('click', closeModal);
+      // 닫기 버튼 클릭 → 버블링 중지 + 닫기
+      closeBtn.addEventListener('click', e => {
+        e.stopPropagation();  // ★ 중요! 이거 때문에 문제 해결됨
+        closeModal();
+      });
 
       // ESC 키 → 닫기
-      document.addEventListener('keydown', function escListener(e){
-        if(e.key === 'Escape'){
+      document.addEventListener('keydown', function escListener(e) {
+        if (e.key === 'Escape') {
           closeModal();
           document.removeEventListener('keydown', escListener);
         }
       });
 
-      // 모달 추가
       document.body.appendChild(modal);
     });
   });
 </script>
+
 
   <script>
 
@@ -539,5 +561,10 @@
       });
     });
   </script>
+  <div id="imgModal" class="img-modal">
+  <span class="close-btn">&times;</span>
+  <img class="modal-content" id="modalImg">
+</div>
+
 </body>
 </html>
