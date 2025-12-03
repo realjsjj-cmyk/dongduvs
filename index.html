@@ -92,8 +92,20 @@
     .two-col{display:grid;grid-template-columns:1fr 360px;gap:18px}
 
     /* 갤러리 */
-    .gallery{display:flex;gap:12px;flex-wrap:wrap}
-    .gallery img{width:calc(33.333% - 8px);border-radius:10px;object-fit:cover;height:120px}
+    .gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.gallery img {
+  width: calc(33.333% - 8px);
+  height: 120px;
+  object-fit: cover;
+  border-radius: 10px;
+  display: block;
+}
+
+
 
     /* 문의 영역 */
     .inquiry{display:flex;gap:18px;align-items:flex-start;margin-top:12px}
