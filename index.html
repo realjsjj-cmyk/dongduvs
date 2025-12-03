@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>지행역 벽산블루밍 - 분양/문의</title>
+  <meta name="description" content="지행역 벽산블루밍 홍보 페이지 - 분양 정보 및 상담전화" />
+  <style>
+    :root{
+      --accent:#0b6cf3;
+      --muted:#666;
+      --card:#fff;
+      --bg:#f4f7fb;
+      --glass: rgba(255,255,255,0.85);
+      --max-w:1200px;
+    }
+    *{box-sizing:border-box;}
+    html,body{height:100%;margin:0;font-family:Inter, "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;color:#111;background:var(--bg);}
+    
+    /* 상단 고정 배너 */
+    .topbar{position:fixed;top:0;left:0;right:0;height:88px;background:linear-gradient(180deg, rgba(255,255,255,0.98), rgba(250,250,250,0.95));backdrop-filter:blur(6px);box-shadow:0 6px 18px rgba(12,20,40,0.06);z-index:1000;display:flex;align-items:center}
+    .container{max-width:var(--max-w);margin:0 auto;padding:0 20px;display:flex;align-items:center;justify-content:space-between;width:100%}
+    .brand{display:flex;align-items:center;gap:14px}
+    .brand img{height:64px;width:64px;object-fit:cover;border-radius:10px;border:1px solid rgba(0,0,0,0.06)}
+    .brand h1{font-size:18px;margin:0}
+    .brand p{margin:0;font-size:12px;color:var(--muted)}
+    .contact{display:flex;flex-direction:column;align-items:flex-end}
+    .phone{font-size:18px;font-weight:800;color:var(--accent);letter-spacing:0.6px}
+    .cta{margin-top:6px}
+    .cta a{background:var(--accent);color:#fff;padding:10px 16px;border-radius:10px;text-decoration:none;font-weight:700}
+
+    main{padding-top:118px;padding-bottom:60px}
+
+    /* Hero */
+    .hero{max-width:var(--max-w);margin:20px auto;background:linear-gradient(180deg,#fff,#fff);border-radius:14px;overflow:hidden;box-shadow:0 10px 40px rgba(12,20,40,0.06);display:grid;grid-template-columns:1fr 460px;gap:0}
+    .hero-left{padding:34px}
+    .badge{display:inline-block;padding:6px 10px;border-radius:999px;background:#eef6ff;color:var(--accent);font-weight:800;margin-bottom:12px}
+    .hero-left h2{margin:0 0 10px 0}
+    .hero-left p.lead{color:var(--muted);line-height:1.6}
+    .hero-right{min-height:280px;background-image:url('images/hero-placeholder.jpg');background-size:cover;background-position:center}
+
+    /* 요약 카드 */
+    .summary{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;padding:22px}
+    .card{background:var(--card);padding:16px;border-radius:12px;box-shadow:0 6px 22px rgba(12,20,40,0.04)}
+    .card h3{margin:0 0 6px 0;font-size:15px}
+    .card p{margin:0;color:var(--muted);font-size:13px}
+
+    /* 섹션 */
+    section.wrap{max-width:var(--max-w);margin:20px auto;padding:0 20px}
+    .section-inner{background:var(--card);border-radius:12px;padding:20px;box-shadow:0 8px 26px rgba(12,20,40,0.04)}
+    h3.section-title{margin:0 0 12px 0}
+    p{color:var(--muted);line-height:1.8}
+    .two-col{display:grid;grid-template-columns:1fr 360px;gap:18px}
+
+    /* 갤러리 */
+    .gallery{display:flex;gap:12px;flex-wrap:wrap}
+    .gallery img{width:calc(33.333% - 8px);border-radius:10px;object-fit:cover;height:120px}
+
+    /* 문의 영역 */
+    .inquiry{display:flex;gap:18px;align-items:flex-start;margin-top:12px}
+    form{flex:1;background:linear-gradient(180deg,#fff,#fff);padding:16px;border-radius:10px;border:1px solid rgba(12,20,40,0.04)}
+    label{display:block;font-size:13px;margin-bottom:6px;font-weight:700}
+    input[type=text],input[type=email],textarea,select{width:100%;padding:10px;border-radius:8px;border:1px solid #e6eefc;font-size:14px}
+    textarea{min-height:120px;resize:vertical}
+    .form-row{display:grid;grid-template-columns:1fr 140px;gap:10px}
+    .btn{display:inline-block;padding:10px 16px;border-radius:10px;background:var(--accent);color:#fff;text-decoration:none;font-weight:800;border:none;cursor:pointer}
+
+    .side-contact{width:360px}
+    .contact-card{background:linear-gradient(180deg,#fff,#fff);padding:16px;border-radius:10px;border:1px solid rgba(12,20,40,0.04)}
+    .contact-card h4{margin:0 0 8px 0}
+    .contact-list{list-style:none;padding:0;margin:0}
+    .contact-list li{padding:8px 0;border-bottom:1px dashed #eee}
+
+    /* 지도 */
+    .map{height:320px;border-radius:10px;overflow:hidden;margin-top:12px}
+
+    /* footer */
+    footer{max-width:var(--max-w);margin:30px auto;padding:18px 20px;text-align:center;color:var(--muted);font-size:13px}
+
+    /* 반응형 */
+    @media(max-width:980px){
+      .hero{grid-template-columns:1fr}
+      .two-col{grid-template-columns:1fr}
+      .summary{grid-template-columns:repeat(2,1fr)}
+      .brand img{height:1000px;width:168px}
+    }
+    @media(max-width:600px){
+      .summary{grid-template-columns:1fr}
+      .container{padding:0 12px}
+      .brand h1{font-size:15px}
+      .topbar{height:76px}
+      main{padding-top:96px}
+      .side-contact{width:100%}
+    }
+
+    /* 전화·문자 버튼 */
+    .call-btn, .sms-btn{
+      display:inline-block;
+      margin:4px 4px 4px 0;
+      padding:10px 16px;
+      border-radius:10px;
+      font-weight:700;
+      color:#fff;
+      text-decoration:none;
+    }
+    .call-btn{background:#0b6cf3;}
+    .sms-btn{background:#0bbf6c;}
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container">
+      <div class="brand">
+        <img src="images/4.jpg" alt="지행역 벽산블루밍" class="banner-img">
+        <div>
+          <h1>지행역 벽산블루밍</h1>
+          <p>동두천 지행동 / 426세대 프라이빗 단지</p>
+        </div>
+      </div>
+      <div class="contact">
+        <div class="phone">상담문의 <span style="font-size:14px;color:var(--accent);margin-left:8px">010-4737-0807</span></div>
+        <div class="cta"><a href="#inquiry">빠른 상담 신청</a></div>
+      </div>
+    </div>          
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero" aria-label="메인 비주얼">
+      <div class="hero-left">
+        <span class="badge">프리미엄 신축</span>
+        <h2>지행역 벽산블루밍 — 자연과 교통을 갖춘 프라이빗 단지</h2>
+        <p class="lead">지하 2층 ~ 지상 24층, 총 426세대. 낮은 건폐율, 우수한 용적률로 쾌적한 생활을 제공합니다. 시행 HC Partners · 시공 벽산엔터프라이즈 · 신탁 무궁화신탁</p>
+        <div class="summary">
+          <div class="card"><h3>대지면적</h3><p>23,727㎡</p></div>
+          <div class="card"><h3>세대수 / 주차</h3><p>426세대 / 569대 (세대당 1.34대)</p></div>
+          <div class="card"><h3>타입</h3><p>84A·84B·84C·84D / 131㎡</p></div>
+        </div>
+      </div>
+      <div class="hero-right" role="img" aria-label="단지 이미지"></div>
+    </section>
+
+    <!-- 사업 개요 -->
+    <section class="wrap" id="overview">
+      <div class="section-inner">
+        <h3 class="section-title">01. 사업 개요 — 426세대 프라이빗 단지, 자연 속의 고품격 주거</h3>
+        <p>지행역 벽산블루밍은 동두천 핵심 주거축 중심의 426세대 대단지 아파트로, 낮은 건폐율(19.41%), 우수한 용적률 설계(215.91%)를 기반으로 쾌적한 주거환경을 제공합니다.</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px">
+          <div>
+            <h4>기본 정보</h4>
+            <ul>
+              <li>위치: 경기도 동두천시 지행동 산 2-1번지</li>
+              <li>대지면적: 23,727㎡</li>
+              <li>사업규모: 공동주택 5개 동 / 지하2층~지상24층</li>
+              <li>세대수: 426세대</li>
+              <li>주차대수: 569대 (세대당1.34대)</li>
+              <li>타입: 84A·84B·84C·84D / 131㎡</li>
+            </ul>
+          </div>
+          <div>
+            <h4>시행·시공·신탁</h4>
+            <ul>
+              <li>시행사: HC Partners</li>
+              <li>시공: 벽산엔터프라이즈</li>
+              <li>신탁사: 무궁화신탁</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 입지 가치 -->
+    <section class="wrap" id="location">
+      <div class="section-inner">
+        <h3 class="section-title">02. 입지 가치 — GTX-C와 가까워지는 서울 생활권</h3>
+        <div class="two-col">
+          <div>
+            <h4>교통 프리미엄</h4>
+            <ul>
+              <li>지행역 도보권</li>
+              <li>GTX-C 덕정역 환승권 + 동두천 연장 계획</li>
+              <li>제2순환고속도로 파주~양주 구간 개통</li>
+              <li>3번 국도·47호선 직결</li>
+            </ul>
+            <h4>교육 프리미엄</h4>
+            <ul>
+              <li>반경 1km 내 초·중·고 밀집</li>
+              <li>동두천외고, 중앙고 도보권</li>
+              <li>신한대·동양대 캠퍼스 인접</li>
+            </ul>
+            <h4>생활 인프라</h4>
+            <ul>
+              <li>대형마트, CGV, 전통시장 5분</li>
+              <li>동두천 시청, 종합운동장, 어등산 레포츠공원</li>
+              <li>숲·녹지·하천 인접</li>
+            </ul>
+          </div>
+          <div>
+            <h4>미래가치</h4>
+            <ul>
+              <li>동두천 국가산업단지 1차 조성</li>
+              <li>제생병원 개원 예정</li>
+              <li>경기도 반려동물 테마파크(2027 예정)</li>
+              <li>경기도 일자리재단 이전(2027 예정)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 단지 설계 -->
+    <section class="wrap" id="design">
+      <div class="section-inner">
+        <h3 class="section-title">03. 단지 설계 — 자연 속 힐링단지 + 정원형 커뮤니티</h3>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px">
+          <div>
+            <h4>토지 이용 계획</h4>
+            <ul>
+              <li>공동주택용지: 23,727㎡ (79.22%)</li>
+              <li>공원·녹지: 6,223㎡ (20.78%)</li>
+              <li>도로: 1,980㎡</li>
+            </ul>
+          </div>
+          <div>
+            <h4>커뮤니티 시설</h4>
+            <ul>
+              <li>전 연령층 복합 커뮤니티</li>
+              <li>조경·녹지 라인 강화</li>
+              <li>어린이·실버·가족 단위 설계</li>
+              <li>풍부한 생활성 강화</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 첨단 시스템 -->
+    <section class="wrap" id="systems">
+      <div class="section-inner">
+        <h3 class="section-title">04. 첨단 시스템 — 안심·편의 설계</h3>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px">
+          <div>
+            <h4>주요 시스템</h4>
+            <ul>
+              <li>차량 위치 인식 / 주차 유도</li>
+              <li>지하주차장 LED 조도 / 무인택배</li>
+              <li>스마트폰 APP 원격 제어</li>
+              <li>엘리베이터 원패스 / 통합 원패스</li>
+              <li>대기전력 차단 / 욕실 센서 / AI 음성 / 세대 무선 AP</li>
+            </ul>
+          </div>
+          <div>
+            <h4>친환경 시스템</h4>
+            <ul>
+              <li>우수 재활용</li>
+              <li>태양광 패널</li>
+              <li>에너지 효율등급 예비 1+</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 오시는 길 -->
+    <section class="wrap" id="access">
+      <div class="section-inner">
+        <h3 class="section-title">05. 오시는 길</h3>
+        <div class="two-col" style="align-items:start">
+          <div>
+            <h4>홍보관</h4>
+            <p>경기도 동두천시 평화로 2185번길 46</p>
+            <h4>현장 위치</h4>
+            <p>경기도 동두천시 지행동 산 2-1번지</p>
+            <div class="map">
+              <iframe width="100%" height="320" src="https://map.naver.com/v5/search/%EB%8F%99%EB%91%90%EC%B2%9C%EC%8B%9C%20%EC%A7%80%ED%96%89%EB%8F%99%20%EC%82%B0%202-1" allowfullscreen></iframe>
+            </div>
+          </div>
+          <aside class="side-contact">
+            <div class="contact-card">
+              <h4>빠른 상담</h4>
+              <p style="margin:6px 0;color:var(--muted)">전화문의 또는 문의폼으로 상담 예약 가능합니다.</p>
+              <ul class="contact-list">
+                <li>상담전화: <a href="tel:01047370807">010-4737-0807</a></li>
+                <li>운영시간: 평일 09:00 - 18:00</li>
+                <li>주소: 평화로 2185번길 46</li>
+              </ul>
+              <div style="margin-top:12px;text-align:center"><a class="btn" href="#inquiry">상담신청하기</a></div>
+            </div>
+            <div style="margin-top:12px" class="contact-card">
+              <h4>갤러리</h4>
+              <div class="gallery">
+                <img src="images/thumb1.jpg" alt="갤러리1" />
+                <img src="images/thumb2.jpg" alt="갤러리2" />
+                <img src="images/thumb3.jpg" alt="갤러리3" />
+              </div>
+            </div>
+          </aside>
+        </div>
+
+        <!-- 문의 폼 -->
+        <div id="inquiry" style="margin-top:14px">
+          <h4>문의 / 상담 신청</h4>
+          <div class="inquiry">
+            <div class="contact-box">
+              <h3>📞 문의·상담</h3>
+              <p>전화 / 문자 상담 전용</p>
+              <a href="tel:01047370807" class="call-btn">전화걸기</a>
+              <a href="sms:01047370807" class="sms-btn">문자보내기</a>
+            </div>
+            <div class="side-contact" style="width:320px">
+              <div class="contact-card">
+                <h4>담당자 정보</h4>
+                <p style="margin:6px 0;color:var(--muted)">담당자: 분양팀 / HC Partners</p>
+                <p style="margin:6px 0;color:var(--muted)">이메일: info@example.com</p>
+                <p style="margin:6px 0;color:var(--muted)"><li>전화: <a href="tel:01047370807">010-4737-0807</a></li></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      © 지행역 벽산블루밍 · 시행 HC Partners · 시공 벽산엔터프라이즈 · 신탁 무궁화신탁
+    </footer>
+  </main>
+
+  <script>
+    // 스무스 스크롤
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click',e=>{
+        e.preventDefault();
+        const id = a.getAttribute('href').slice(1);
+        const el = document.getElementById(id);
+        if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
+      });
+    });
+  </script>
+</body>
+</html>
